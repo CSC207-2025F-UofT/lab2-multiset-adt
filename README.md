@@ -34,7 +34,7 @@ today, and don't be afraid to make mistakes.**
 - Aim to review at least one pull request during this activity.
 - Actively discuss with those around you to develop strategies for effectively working on a shared code base.
 
-## The code
+## The code ============
 
 You will be developing code for a `MultiSet` ADT, as well as several classes which implement the MultiSet ADT and
 a main method which makes use of it.
@@ -47,10 +47,10 @@ It should feel quite similar to code you would have seen in your first-year CS c
 In a small group (around 4–5 students), choose one of you to make a fork of
 https://github.com/CSC207-2024F-UofT/multiset-adt 
 
-- [ ] Each other team member should then make a fork of that repo (or the repository owner can add the others
+- [X] Each other team member should then make a fork of that repo (or the repository owner can add the others
   as collaborators). This is so you have a shared remote repo to which your group can all contribute.
 
-- [ ] Get a local copy of your remote repo.
+- [X] Get a local copy of your remote repo.
   You can do this by either method from last week: git clone <url>
   or creating a new project from version control in IntelliJ (recommended).
 
