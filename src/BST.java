@@ -29,6 +29,12 @@ public class BST {
 
 
     public boolean isEmpty() {
+        if (root == null) {
+            return true;
+        }
+        if (left == null && right == null) {
+            return true;
+        }
         return false; // TODO implement me!
     }
 
