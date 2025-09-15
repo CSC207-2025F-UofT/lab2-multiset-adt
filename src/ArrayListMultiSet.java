@@ -6,7 +6,7 @@ public class ArrayListMultiSet extends MultiSet {
     private final ArrayList<Integer> lst = new ArrayList<>();
 
     /**
-     * Add the given item to this multiset.
+     * Add the given item to this multiset
      *
      * @param item the item to add
      */
