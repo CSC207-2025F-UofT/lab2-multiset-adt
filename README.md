@@ -1,4 +1,5 @@
 # Lab 2: Second Activity: Translating Python code to Java code
+REGINA!!!!!!!!!
 
 The second lab activity this week will have your team practice using GitHub Issues
 to divide up coding tasks and PRs to contribute code. The code itself should feel quite familiar,
@@ -60,19 +61,19 @@ in the instructions below.
 Choose one member of your team to make a fork of
 https://github.com/CSC207-2025F-UofT/lab2-multiset-adt.
 
-- [ ] The repository owner can then add the other members as collaborators of this repository
+- [x] The repository owner can then add the other members as collaborators of this repository
   so that everyone has access to it. This is so that your team has a shared remote repo to which
   your group can all contribute.
 
 ---
 
-- [ ] Get a local copy of this remote repo.
+- [x] Get a local copy of this remote repo.
   You can do this by either method from last week: git clone <url>
   or creating a new project from version control in IntelliJ.
 
 ---
 
-- [ ] Take the time to skim the rest of the instructions to get a better sense of what you'll be doing
+- [x] Take the time to skim the rest of the instructions to get a better sense of what you'll be doing
   in this activity. If you have any immediate questions, raise these with your group or ask your TA.
 
 ---
