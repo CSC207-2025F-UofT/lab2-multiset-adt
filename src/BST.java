@@ -29,7 +29,7 @@ public class BST {
 
 
     public boolean isEmpty() {
-        return false; // TODO implement me!
+        return this.root == null;
     }
 
     public boolean contains(int item) {
@@ -42,38 +42,95 @@ public class BST {
             return this.left.contains(item);
         }
         return this.right.contains(item);
-
     }
 
 
     public void insert(int item) {
-
+        if (this.isEmpty()) {
+            this.root = item;
+            this.left = new BST();
+            this.right = new BST();
+        } else if (item <= this.root) {
+            this.left.insert(item);
+        } else {
+            this.right.insert(item);
+        }
     }
 
 
     public void delete(int item) {
-
+        if (this.isEmpty()) {
+            return;
+        } else if (item < this.root) {
+            this.left.delete(item);
+        } else if (item > this.root) {
+            this.right.delete(item);
+        } else { // item == this.root
+            this.deleteRoot();
+        }
     }
 
     private void deleteRoot() {
-
+        if (this.left.isEmpty() && this.right.isEmpty()) {
+            // No children - just remove the root
+            this.root = null;
+            this.left = null;
+            this.right = null;
+        } else if (this.left.isEmpty()) {
+            // Only right child - replace root with right subtree
+            this.root = this.right.root;
+            this.left = this.right.left;
+            this.right = this.right.right;
+        } else if (this.right.isEmpty()) {
+            // Only left child - replace root with left subtree
+            this.root = this.left.root;
+            this.right = this.left.right;
+            this.left = this.left.left;
+        } else {
+            // Two children - replace root with max from left subtree
+            this.root = this.left.extractMax();
+        }
     }
 
 
     private int extractMax() {
-        return -1;
+        if (this.right.isEmpty()) {
+            // This node has the maximum value
+            int maxValue = this.root;
+            this.deleteRoot(); // Remove this node
+            return maxValue;
+        } else {
+            // Maximum is in the right subtree
+            return this.right.extractMax();
+        }
     }
 
     public int height() {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        } else {
+            return 1 + Math.max(this.left.height(), this.right.height());
+        }
     }
 
     public int count(int item) {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        } else if (item == this.root) {
+            return 1 + this.left.count(item) + this.right.count(item);
+        } else if (item < this.root) {
+            return this.left.count(item);
+        } else {
+            return this.right.count(item);
+        }
     }
 
     public int getSize() {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        } else {
+            return 1 + this.left.getSize() + this.right.getSize();
+        }
     }
 
     public static void main(String[] args) {
@@ -85,6 +142,14 @@ public class BST {
         int a = 1;
         bst.insert(a);
         System.out.println(bst.contains(a));
-    }
 
+        // Additional basic testing
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(7);
+        System.out.println("Size: " + bst.getSize()); // Should print 4
+        System.out.println("Height: " + bst.height()); // Should print 3
+        System.out.println("Contains 5: " + bst.contains(5)); // Should print true
+        System.out.println("Contains 10: " + bst.contains(10)); // Should print false
+    }
 }
