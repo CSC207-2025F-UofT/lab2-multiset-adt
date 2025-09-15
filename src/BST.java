@@ -1,3 +1,5 @@
+import static java.lang.Math.max;
+
 /**
  * A minimal implementation of a binary search tree. See the python version for
  * additional documentation.
@@ -29,7 +31,7 @@ public class BST {
 
 
     public boolean isEmpty() {
-        return false; // TODO implement me!
+        return this.root == null; //  implement me!
     }
 
     public boolean contains(int item) {
@@ -47,33 +49,103 @@ public class BST {
 
 
     public void insert(int item) {
-
+        //Insert <item> into this tree.
+        if (this.isEmpty()) {
+            this.root = item;
+            this.left = new BST();
+            this.right = new BST();
+        }else if (item <= this.root) {
+            this.left.insert(item);
+        }else{
+            this.right.insert(item);
+        }
     }
 
 
     public void delete(int item) {
+        //Remove *one* occurrence of <item> from this BST.
 
+        //Do nothing if <item> is not in the BST.
+        if (!this.isEmpty()) {
+            if (this.root == item) {
+                this.deleteRoot();
+            } else if (item < this.root) {
+                this.left.delete(item);
+            } else {
+                this.right.delete(item);
+            }
+        }
     }
 
     private void deleteRoot() {
+        //Remove the root of this tree.
 
+        //Precondition: this tree is *non-empty*.
+
+        if ((this.left.isEmpty()) && (this.right.isEmpty())) {
+            this.root = null;
+            this.left = null;
+            this.right = null;
+        }else if (this.left.isEmpty()) {
+            BST tempRight = this.right;
+            this.root= tempRight.root;
+            this.left= tempRight.left;
+            this.right = tempRight.right;
+        }else if (this.right.isEmpty()) {
+            BST tempLeft = this.left;
+            this.root= tempLeft.root;
+            this.left= tempLeft.left;
+            this.right = tempLeft.right;
+        }else{
+            this.root = this.left.extractMax();
+        }
     }
 
 
     private int extractMax() {
-        return -1;
+        //Remove and return the maximum item stored in this tree.
+        //Precondition: this tree is *non-empty*.
+
+        if (this.right.isEmpty()) {
+            int maxItem = this.root;
+            BST tempLeft = this.left;
+            this.root= tempLeft.root;
+            this.left=tempLeft.left;
+            this.right = tempLeft.right;
+            return maxItem;
+        }else{
+            return this.right.extractMax();
+        }
     }
 
     public int height() {
-        return -1;
+        //Return the height of this BST.
+        if (this.isEmpty()) {
+            return 0;
+        }else {
+            return max(this.left.height(), this.right.height()) + 1;
+        }
     }
 
     public int count(int item) {
-        return -1;
+        //Return the number of occurrences of <item> in this BST.
+        if (this.isEmpty()){
+            return 0;
+        }else if ( this.root > item){
+            return this.left.count(item);
+        }else if ( this.root == item){
+            return 1 + this.left.count(item) + this.right.count(item);
+        }else{
+            return this.right.count(item);
+        }
     }
 
     public int getSize() {
-        return -1;
+        //Return the number of items in this BST.
+        if (this.isEmpty()){
+            return 0;
+        }
+        return 1 + this.left.getSize() + this.right.getSize();
     }
 
     public static void main(String[] args) {
