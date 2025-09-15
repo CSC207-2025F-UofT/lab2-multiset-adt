@@ -56,6 +56,7 @@ public class BST {
     }
 
     private void deleteRoot() {
+        // java implement
         if ( this.left.isEmpty() && this.right.isEmpty() )
         {
             this.root = null;
