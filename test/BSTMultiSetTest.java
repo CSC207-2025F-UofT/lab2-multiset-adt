@@ -1,16 +1,17 @@
 import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BSTMultiSetTest {
 
-    @Test
+    @org.testng.annotations.Test
     public void testIsEmptyTrue() {
         BSTMultiSet b = new BSTMultiSet();
         assertTrue(b.isEmpty());
     }
 
-    @Test
+    @org.junit.Test
     public void testIsEmptyFalse() {
         BSTMultiSet b = new BSTMultiSet();
         b.add(5);
