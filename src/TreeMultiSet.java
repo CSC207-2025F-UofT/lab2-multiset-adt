@@ -3,6 +3,7 @@ public class TreeMultiSet extends MultiSet {
     // this Tree object is a private instance variable for this class.
     private final Tree root = new Tree();
 
+
     /**
      * Add the given item to this multiset.
      *
@@ -10,7 +11,7 @@ public class TreeMultiSet extends MultiSet {
      */
     @Override
     void add(int item) {
-
+    root.insert(item);
     }
 
     /**
@@ -21,7 +22,7 @@ public class TreeMultiSet extends MultiSet {
      */
     @Override
     void remove(int item) {
-
+        root.deleteItem(item);
     }
 
     /**
@@ -32,15 +33,14 @@ public class TreeMultiSet extends MultiSet {
      */
     @Override
     boolean contains(int item) {
-        return false;
+        return root.containsItem(item);
     }
-
     /**
      * @return True if this multiset is empty.
      */
     @Override
     boolean isEmpty() {
-        return false;
+        return root.isEmpty(item);
     }
 
     /**
@@ -51,14 +51,14 @@ public class TreeMultiSet extends MultiSet {
      */
     @Override
     int count(int item) {
-        return -1;
+        return root.count(item);
     }
-
     /**
      * @return How many items are in this multiset.
      */
     @Override
     int size() {
-        return -1;
+        return root.size(item);
+
     }
 }
