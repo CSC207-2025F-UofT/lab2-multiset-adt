@@ -10,7 +10,6 @@ class Node {
     }
 }
 
-
 public class LinkedListMultiSet extends MultiSet {
 
     // a linked list initially is empty
