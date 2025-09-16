@@ -107,19 +107,55 @@ public class BST {
 
 
     private int extractMax() {
-        return -1;
+        if (this.right.isEmpty()) {
+            int maxItem = this.root;
+
+            int tempRoot = this.left.root;
+            BST tempLeft = this.left.left;
+            BST tempRight = this.left.right;
+
+            this.root = tempRoot;
+            this.left = tempLeft;
+            this.right = tempRight;
+
+            return maxItem;
+        }
+        else {
+            return this.right.extractMax();
+        }
     }
 
     public int height() {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        }
+        else {
+            return Math.max(this.left.height(), this.right.height());
+        }
     }
 
     public int count(int item) {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        }
+        else if (this.root > item) {
+            return this.left.count(item);
+        }
+        else if (this.root < item) {
+            return this.right.count(item);
+        }
+        else  {
+            return 1 + this.left.count(item) + this.right.count(item);
+        }
     }
 
     public int getSize() {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        }
+        else {
+            return 1 + this.left.getSize() + this.right.getSize();
+        }
     }
 
     public static void main(String[] args) {
