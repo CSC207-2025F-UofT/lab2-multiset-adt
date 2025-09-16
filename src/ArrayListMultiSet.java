@@ -5,14 +5,9 @@ public class ArrayListMultiSet extends MultiSet {
     // this ArrayList object is a private instance variable for this class.
     private final ArrayList<Integer> lst = new ArrayList<>();
 
-    /**
-     * Add the given item to this multiset.
-     *
-     * @param item the item to add
-     */
     @Override
     void add(int item) {
-
+        lst.add(item);
     }
 
     /**
@@ -23,7 +18,9 @@ public class ArrayListMultiSet extends MultiSet {
      */
     @Override
     void remove(int item) {
-
+        if (lst.contains(item)) {
+            lst.remove(item);
+        }
     }
 
     /**
@@ -34,6 +31,9 @@ public class ArrayListMultiSet extends MultiSet {
      */
     @Override
     boolean contains(int item) {
+        for (int i : lst)
+            if (i == item)
+                return true;
         return false;
     }
 
@@ -42,7 +42,7 @@ public class ArrayListMultiSet extends MultiSet {
      */
     @Override
     boolean isEmpty() {
-        return false;
+        return lst.size() == 0;
     }
 
     /**
@@ -53,7 +53,12 @@ public class ArrayListMultiSet extends MultiSet {
      */
     @Override
     int count(int item) {
-        return -1;
+        int count = 0;
+        for (int i : lst) {
+            if (lst.contains(i))
+                count++;
+        }
+        return count;
     }
 
     /**
@@ -61,6 +66,10 @@ public class ArrayListMultiSet extends MultiSet {
      */
     @Override
     int size() {
-        return -1;
+        int i = 0;
+        while (lst.get(i) != null)
+            i++;
+        return i;
     }
+
 }
