@@ -9,39 +9,71 @@ class Node {
     }
 }
 
-
 public class LinkedListMultiSet extends MultiSet {
 
-    // a linked list initially is empty
     private Node front;
     private int size;
 
-
+    @Override
     public void add(int item) {
-        Node newNode =  new Node(item);
+        Node newNode = new Node(item);
         newNode.next = front;
         front = newNode;
         size += 1;
     }
 
+    @Override
     public void remove(int item) {
+        Node prev = null;
+        Node cur = front;
 
+        while (cur != null) {
+            if (cur.item == item) {
+                if (prev == null) {
+                    front = cur.next;
+                } else {
+                    prev.next = cur.next;
+                }
+                size -= 1;
+                return;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
     }
 
+    @Override
     public boolean contains(int item) {
+        Node cur = front;
+        while (cur != null) {
+            if (cur.item == item) {
+                return true;
+            }
+            cur = cur.next;
+        }
         return false;
     }
 
+    @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
-
+    @Override
     public int count(int item) {
-        return -1;
+        int numSeen = 0;
+        Node cur = front;
+        while (cur != null) {
+            if (cur.item == item) {
+                numSeen += 1;
+            }
+            cur = cur.next;
+        }
+        return numSeen;
     }
 
+    @Override
     public int size() {
-        return -1;
+        return size;
     }
 }
