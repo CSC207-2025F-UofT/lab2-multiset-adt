@@ -1,4 +1,5 @@
 
+
 // Node is only used inside the LinkedList class, so we define it in the same file;
 // there can only be one public class in a file, but there can also be non-public classes.
 class Node {
@@ -42,6 +43,7 @@ public class LinkedListMultiSet extends MultiSet {
         }
     }
 
+
     public boolean contains(int item) {
         Node curr = front;
         while (curr != null) {
@@ -66,6 +68,7 @@ public class LinkedListMultiSet extends MultiSet {
                 numSeen += 1;
             }
             curr = curr.next;
+
         }
         return numSeen;
     }

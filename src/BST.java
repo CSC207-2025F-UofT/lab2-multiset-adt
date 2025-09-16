@@ -29,7 +29,7 @@ public class BST {
 
 
     public boolean isEmpty() {
-        return false; // TODO implement me!
+        return root == null;
     }
 
     public boolean contains(int item) {
@@ -47,33 +47,96 @@ public class BST {
 
 
     public void insert(int item) {
-
+        if (isEmpty()) {
+            root = item;
+            left = new BST();
+            right = new BST();
+        }
+        else if (item <= root) {
+            left.insert(item);
+        }
+        else {
+            right.insert(item);
+        }
     }
 
 
     public void delete(int item) {
-
+        if (isEmpty()) {
+            return;
+        }
+        else if (root == item) {
+            deleteRoot();
+        }
+        else if (item < root) {
+            left.delete(item);
+        }
+        else {
+            right.delete();
+        }
     }
 
     private void deleteRoot() {
-
+        if (left.isEmpty() && right.isEmpty()) {
+            root = null;
+            left = null;
+            right = null;
+        }
+        else if (left.isEmpty()) {
+            root = right.root;
+            left = right.left;
+            right = right.right;
+        }
+        else if (right.isEmpty()) {
+            root = left.root;
+            left = left.left;
+            right = left.right;
+        }
+        else {
+            root = left.extractMax();
+        }
     }
 
-
     private int extractMax() {
-        return -1;
+        if (right.isEmpty()) {
+            int max = root;
+            root = left.root;
+            left = left.left;
+            right = left.right;
+            return max;
+        }
+        else {
+            return right.extractMax();
+        }
     }
 
     public int height() {
-        return -1;
+        if (isEmpty()) {
+            return 0;
+        }
+        return Math.max(left.height(), right,height()) + 1;
     }
 
     public int count(int item) {
-        return -1;
+        if (isEmpty()) {
+            return 0;
+        }
+        else if (root > item) {
+            return left.count(item);
+        }
+        else if (root == item) {
+            return 1 + left.count(item) + right.count(item);
+        }
+        else {
+            return right.count(item);
+        }
     }
 
     public int getSize() {
-        return -1;
+        if (isEmpty()) {
+            return 0;
+        }
+        return 1 + left.getSize() + right.getSize();
     }
 
     public static void main(String[] args) {
