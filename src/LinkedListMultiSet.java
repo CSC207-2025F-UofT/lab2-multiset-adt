@@ -6,9 +6,9 @@ class Node {
     Node next;
     Node(int item) {
         this.item = item;
+        this.next = null;
     }
 }
-
 
 public class LinkedListMultiSet extends MultiSet {
 
@@ -25,23 +25,51 @@ public class LinkedListMultiSet extends MultiSet {
     }
 
     public void remove(int item) {
-
+        Node cur = front;
+        Node prev = null;
+        while (cur != null) {
+            if (cur.item == item) {
+                size--;
+                if (prev != null) {
+                    prev.next = cur.next;
+                }
+                else {
+                    front = cur.next;
+                }
+            }
+            prev = cur;
+            cur = cur.next;
+        }
     }
 
     public boolean contains(int item) {
+        Node cur = front;
+        while (cur != null) {
+            if (cur.item == item){
+                return true;
+            }
+            cur = cur.next;
+        }
         return false;
     }
 
     public boolean isEmpty() {
-        return false;
+        return (front == null);
     }
 
-
     public int count(int item) {
-        return -1;
+        int count = 0;
+        Node cur = front;
+        while (cur != null) {
+            if (cur.item == item) {
+                count++;
+            }
+            cur = cur.next;
+        }
+        return count;
     }
 
     public int size() {
-        return -1;
+        return size;
     }
 }
