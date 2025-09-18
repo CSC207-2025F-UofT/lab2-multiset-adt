@@ -47,6 +47,7 @@ public class BST {
 
 
     public void insert(int item) {
+        // PR tests
         if (this.isEmpty()) {
             this.root = item;
             this.left = new BST();
