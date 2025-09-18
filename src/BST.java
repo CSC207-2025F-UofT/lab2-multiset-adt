@@ -29,7 +29,7 @@ public class BST {
 
 
     public boolean isEmpty() {
-        return false; // TODO implement me!
+        return this.root == null;
     }
 
     public boolean contains(int item) {
@@ -47,7 +47,15 @@ public class BST {
 
 
     public void insert(int item) {
-
+        if (this.isEmpty()) {
+            this.root = item;
+            this.left = new BST();
+            this.right = new BST();
+        } else if (item <= this.root) {
+                this.left.insert(item);
+        } else {
+            this.right.insert(item);
+        }
     }
 
 
@@ -61,19 +69,47 @@ public class BST {
 
 
     private int extractMax() {
-        return -1;
+
+        if (this.right.isEmpty()) {
+            Integer max = this.root;
+            this.root = this.left.root;
+            this.right = this.left.right;
+            this.left = this.left.left;
+            return max;
+        } else {
+            int i = this.right.extractMax();
+            return i;
+        }
     }
 
     public int height() {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        } else {
+            int subtree_height = Math.max(this.left.height(), this.right.height()) + 1;
+            return subtree_height;
+        }
     }
 
     public int count(int item) {
-        return -1;
+
+        if (this.isEmpty()) {
+            return 0;
+        } else if (item > this.root) {
+            return this.right.count(item);
+        } else if (item == this.root) {
+            return 1 + this.left.count(item) + this.right.count(item);
+        } else {
+            return this.left.count(item);
+        }
     }
 
     public int getSize() {
-        return -1;
+        if (this.isEmpty()) {
+            return 0;
+        } else {
+            return 1 + this.left.getSize() + this.right.getSize();
+        }
     }
 
     public static void main(String[] args) {
