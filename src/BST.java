@@ -29,7 +29,7 @@ public class BST {
 
 
     public boolean isEmpty() {
-        return false; // TODO implement me!
+        return root == null;
     }
 
     public boolean contains(int item) {
@@ -47,33 +47,78 @@ public class BST {
 
 
     public void insert(int item) {
-
+        if (isEmpty()) {
+            // Make new leaf
+            root = item;
+            left = new BST();
+            right = new BST();
+        } else if (item <= root) {
+            left.insert(item);
+        } else {
+            right.insert(item);
+        }
     }
 
 
     public void delete(int item) {
+        if (isEmpty()) {
+            return;
+        }
 
+        if (item == this.root) {
+            deleteRoot();
+        } else if (item < this.root) {
+            this.left.delete(item);
+        } else {
+            this.right.delete(item);
+        }
     }
 
     private void deleteRoot() {
-
+        if (left.isEmpty() && right.isEmpty()) {
+            root = null;
+            left = null;
+            right = null;
+        } else if (left.isEmpty()) {
+            // TODO: Figure out which order to do the updates in
+        } else if  (right.isEmpty()) {
+            // TODO: Figure out which order to do the updates in
+        } else {
+            root = left.extractMax();
+        }
     }
 
 
     private int extractMax() {
-        return -1;
+        if (right.isEmpty()) {
+            int max_item = root;
+
+            deleteRoot();
+
+            return max_item;
+        } else {
+            return right.extractMax();
+        }
     }
 
     public int height() {
-        return -1;
+        return isEmpty() ? 0 : Math.max(left.height(), right.height()) + 1;
     }
 
     public int count(int item) {
-        return -1;
+        if (isEmpty()) {
+            return 0;
+        } else if (root > item) {
+            return left.count(item);
+        } else if (root == item) {
+            return 1 + left.count(item) +  right.count(item);
+        } else {
+            return right.count(item);
+        }
     }
 
     public int getSize() {
-        return -1;
+        return isEmpty() ? 0 : 1 + left.getSize() + right.getSize();
     }
 
     public static void main(String[] args) {
